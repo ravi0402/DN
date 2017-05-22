@@ -5,20 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
-
+require('./db.js');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 
-client = mysql.createConnection({
-    host: '54.169.207.85',
-    user: 'dn_read_only',
-    password :'f@str3edr954',
-    port : 3306,
-    database:'dailyninja',
-    multipleStatements:true
-});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
