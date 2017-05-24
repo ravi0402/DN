@@ -3,10 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index2', { title: 'Express' });
 });
 
-router.get('/products', function(req, res, next) {
+router.get('/products4', function(req, res, next) {
     client.query("select do.order_date, pm.product_name, COUNT(do.order_id) as order_count from daily_orders do join product_master pm on do.product_master = pm.id where do.status = 'NOT_FOUND' and do.order_date > DATE_SUB(CURDATE(),interval 4 day) group by do.order_date, pm.product_name " , function(err, results) {
         if (err)
         {
@@ -83,115 +83,80 @@ router.get('/products', function(req, res, next) {
     });
 });
 
-router.get('/products7', function(req, res, next) {
-    client.query("select do.order_date, pm.product_name, COUNT(do.order_id) as order_count from daily_orders do join product_master pm on do.product_master = pm.id where do.status = 'NOT_FOUND' and do.order_date > DATE_SUB(CURDATE(),interval 7 day) group by do.order_date, pm.product_name " , function(err, results) {
+
+
+
+
+router.get('/products30', function(req, res, next) {
+    client.query("SELECT pm.product_name, COUNT(do.order_id) AS order_count FROM daily_orders do JOIN product_master pm ON do.product_master = pm.id WHERE do.status = 'NOT_FOUND' AND do.order_date > DATE_SUB(CURDATE(),INTERVAL 30 DAY) GROUP BY pm.product_name ORDER BY order_count DESC" , function(err, results) {
         if (err) {
             throw err;
         }
         var keyy = Object.keys(results[0]);
-
-        var obj2 = new Object();
-
         var arr = [];
-        var final_arr = [];
-        var dates = [];
         var key1 = 'coll';
         var key2 = 'roww';
-        var count = [];
+
         for (var i=0; i<results.length; i++)
         {
-
             var map = new Object();
-            map[key1] = results[i].order_date.toString().slice(4,15);
-            map[key2] = results[i].product_name + ',' + results[i].order_count ;
+            map[key1] = results[i].product_name;
+            map[key2] = results[i].order_count;
             arr.push(map);
         }
+        res.render('index2', {
+            title: 'Product Count (last 30 days)',
+            results: arr
+        });
+    });
+});
 
-        for(var i=0,k=0;i<arr.length;i++)
-        {
-            for (var j = i + 1; j < arr.length; j++)
-            {
 
-                if (arr[i][key2].slice(0, -2) == arr[j][key2].slice(0, -2))
-                {
-                    count[k] =
-                    final_arr[k] = arr[j][key2].slice(0, -2);
-                }
-
-            }
+router.get('/products7', function(req, res, next) {
+    client.query("SELECT pm.product_name, COUNT(do.order_id) AS order_count FROM daily_orders do JOIN product_master pm ON do.product_master = pm.id WHERE do.status = 'NOT_FOUND' AND do.order_date > DATE_SUB(CURDATE(),INTERVAL 7 DAY) GROUP BY pm.product_name ORDER BY order_count DESC" , function(err, results) {
+        if (err) {
+            throw err;
         }
-            // if(i==0)
-            // {
-            //     arr_new[j] = arr[i];
-            //
-            // }
-            //
-            // else
-            // {
-            //
-            //     if (arr[i][key2].slice(0,-2) == arr_new[j][key2].slice(0,-2) )
-            //     {
-            //
-            //         count[j] = parseInt(arr_new[j][key2].slice(-1)) + parseInt(arr[i][key2].slice(-1)) ;
-            //     }
-            //     else
-            //     {
-            //         j++;
-            //         arr_new[j] = arr[i];
-            //     }
+        var keyy = Object.keys(results[0]);
+        var arr = [];
+        var key1 = 'coll';
+        var key2 = 'roww';
 
-        console.log(count);
-
-
-        var dates = [];
-        var product_count = [];
-
-        for(var i = 0;i<arr_new.length ;i++)
+        for (var i=0; i<results.length; i++)
         {
-            dates.push(arr_new[i][key1]);
-
+            var map = new Object();
+            map[key1] = results[i].product_name;
+            map[key2] = results[i].order_count;
+            arr.push(map);
         }
-
-
-        //console.log(product);
-
-        res.render('index', {
+        res.render('index2', {
             title: 'Product Count (last 7 days)',
-            keyy : dates,
-            results: product_count
-        });
-    });
-});
-
-router.get('/vendor', function(req, res, next) {
-    client.query('SELECT name FROM vendor WHERE allow_cash_collection = 1', function(err, results){
-        if (err) {
-            throw err;
-        }
-        //console.log(results);
-        var keyy = Object.keys(results[0]);
-        //console.log(keyy);
-        res.render('index', {
-            title: 'DailyNinja',
-            keyy : keyy,
-            results: results
+            results: arr
         });
     });
 });
 
 
-router.get('/order', function(req, res, next) {
-    client.query("SELECT COUNT(user_name), COUNT(billing_master.amount), building.building_name FROM `user` INNER JOIN building ON user.building=building.id INNER JOIN billing_master ON user.billing_master_id = billing_master.id GROUP BY building HAVING COUNT(user_name) > 100 AND COUNT(billing_master.amount) > 0 ", function(err, results){
+router.get('/products', function(req, res, next) {
+    client.query("SELECT pm.product_name, COUNT(do.order_id) AS order_count FROM daily_orders do JOIN product_master pm ON do.product_master = pm.id WHERE do.status = 'NOT_FOUND' AND do.order_date > DATE_SUB(CURDATE(),INTERVAL 1 DAY) GROUP BY pm.product_name ORDER BY order_count DESC" , function(err, results) {
         if (err) {
             throw err;
         }
-        //console.log(results);
         var keyy = Object.keys(results[0]);
-        //console.log(keyy);
-        res.render('index', {
-            title: 'DailyNinja',
-            keyy : keyy,
-            results: results
+        var arr = [];
+        var key1 = 'coll';
+        var key2 = 'roww';
+
+        for (var i=0; i<results.length; i++)
+        {
+            var map = new Object();
+            map[key1] = results[i].product_name;
+            map[key2] = results[i].order_count;
+            arr.push(map);
+        }
+        res.render('index2', {
+            title: 'Product Count(Yesterday)',
+            results: arr
         });
     });
 });

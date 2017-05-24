@@ -1,0 +1,38 @@
+extends layout
+
+
+block content
+  h1(align='center')= title
+  br
+  br
+  div
+    table(class='table table-striped table-bordered',align='center')
+      thead
+        th= 'Product'
+        th= 'Count'
+      tbody
+        - each result in results
+          tr
+            td= result.coll
+            td= result.roww
+
+
+
+
+//block content
+//  h1(align='center')= title
+//  p(align='center') Welcome to #{title}
+//  br
+//  br
+//  div
+//    table(width='100%' cellpadding="10", cellspacing="3", border="4" )
+//      thead
+//        tr
+//          - for result in results
+//            - for key in keyy
+//              th=key
+//      tbody
+//        - each result in results
+//        tr
+//          - each key in keyy
+//            td(align='center')=result[key]

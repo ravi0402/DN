@@ -1,0 +1,30 @@
+<div class="row text-center">
+    <div class="container">
+        <div class="row" align="center">
+            
+        </div>
+        <div class='btn-toolbar'>
+
+            <button class="page-scroll btn btn-xl" ng-click= products1()>Yesterday</button>
+            <button class="page-scroll btn btn-xl" ng-click= products7()>7 days</button>
+            <button class="page-scroll btn btn-xl" ng-click= products30()>30 days</button>
+
+        </div>
+    </nav>
+    
+        <h2 class="section-heading">Product Not Found</h2>
+      <a class="btn" onClick="doSaveAs() title="Export Table" ng-click='csv.generate()' ng-href="{{ csv.link() }}" download="NotFound.csv">
+        <i class="glyphicon glyphicon-new-window"></i> &#160;Export
+      </a>
+        <table ng-table="vm.tableParams" class="table table-bordered" export-csv="csv" separator=";">
+            <tr ng-repeat="x in result">
+                <td title="'Product'" >
+                    {{x.coll}}</td>
+                <td title="'Count'">
+                    {{x.roww}}</td>
+                    <td title="'Cost'">
+                    {{x.roww1}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
