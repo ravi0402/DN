@@ -4,10 +4,49 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
 .controller('mainCtrl', function( NgTableParams,$filter,$timeout, $http, $location, $rootScope, $window, $interval, $scope) {
     var self = this;
 
-    $scope.appState = 0;
+
+    $scope.daterange = function(date)
+    {
+        if(date!=null)
+        {
+            $http({method:'POST',
+            url:'http://localhost:8085/api/daterange',
+            dataType: 'json',
+            data: { json: JSON.stringify(date) }})   
+            .success(function (data,status) {
+            
+            var tabledata =[];
+            $scope.tabledata = data;
+            if(tabledata!=null)
+            {
+                var result = [];
+                $scope.result = $scope.tabledata;
+                self.tableParams = new NgTableParams({}, { dataset: result});
+            }
+        });
+        }
+    }
+
+    $scope.outofStock = function()
+    {
+        $http.get('/api/outofstock').success(function(data)
+        {
+            var tabledata =[];
+            $scope.tabledata = data;
+            if(tabledata!=null)
+            {
+                var result = [];
+                $scope.resul = $scope.tabledata;
+                self.tabletParams = new NgTableParams({}, { dataset: resul});
+            }
+        });
+
+    }
+
+
     $scope.products1 = function()
     {
-        appState = 1;
+
         $http.get('/api/products1').success(function(data)
         {
             var tabledata =[];
@@ -22,7 +61,7 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
     }
      $scope.products7 = function()
     {
-        appState = 1;
+
         $http.get('/api/products7').success(function(data)
         {
             var tabledata =[];
@@ -39,7 +78,7 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
 
     $scope.products30 = function()
     {
-        appState = 1;
+
         $http.get('/api/products30').success(function(data)
         {
             var tabledata =[];
