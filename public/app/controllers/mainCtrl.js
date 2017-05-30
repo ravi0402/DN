@@ -1,19 +1,31 @@
-var app = angular.module('mainController',['ngTable','ngTableToCsv'])
+var app = angular.module('mainController',['ngTable','ngTableToCsv','daterangepicker','oitozero.ngSweetAlert'])
 
 // Controller: mainCtrl is used to handle login and main index functions (stuff that should run on every page)  
-.controller('mainCtrl', function( NgTableParams,$filter,$timeout, $http, $location, $rootScope, $window, $interval, $scope) {
+.controller('mainCtrl', function( NgTableParams,$filter,$timeout,SweetAlert,$http, $location, $rootScope, $window, $interval, $scope) {
     var self = this;
 
+$scope.date = {startDate: null, endDate: null};
 
-    $scope.daterange = function(date)
+var d = new Date();
+d.setDate(d.getDate() - 1);
+dd = $filter("date")(d, 'yyyy-MM-dd');
+
+
+
+$scope.datedefault = $filter("date")(dd, 'yyyy-MMM-dd');
+
+
+
+$scope.datepick = function(date){
+    if(date==undefined)
     {
-        if(date!=null)
-        {
-            $http({method:'POST',
-            url:'http://localhost:8085/api/daterange',
-            dataType: 'json',
-            data: { json: JSON.stringify(date) }})   
-            .success(function (data,status) {
+        date = $filter("date")(dd, 'yyyy-MM-dd');
+    }
+
+    var data = { json: date };
+
+    $http.post('/api/datepick',data)
+        .success(function (data,status) {
             
             var tabledata =[];
             $scope.tabledata = data;
@@ -23,8 +35,103 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
                 $scope.result = $scope.tabledata;
                 self.tableParams = new NgTableParams({}, { dataset: result});
             }
+        }).error(function(data) {
+            console.error("error in posting");
+
+    });
+    }
+
+$scope.drangeSubs = function(datey){
+
+    if(datey.startDate == null || datey.startDate == undefined  || datey.endDate == null || datey.endDate == undefined)
+    {
+
+        SweetAlert.swal("Please select date range!"); 
+
+    }
+    else
+    {
+        start = $filter("date")(datey.startDate._d, 'yyyy-MM-dd');
+        end = $filter("date")(datey.endDate._d, 'yyyy-MM-dd');
+        var data = { startDate: start,
+                 endDate: end } ;
+
+        $http.post('/api/drangeSubs',data)
+            .success(function (data,status) {
+                
+                var tabledata =[];
+                $scope.tabledata = data;
+                if(tabledata!=null)
+                {
+                    var result = [];
+                    $scope.result = $scope.tabledata;
+                    self.tableParams = new NgTableParams({}, { dataset: result});
+                }
+            }).error(function(data) {
+                
+                console.error("error in posting");
+    });
+    }
+
+}
+
+
+
+$scope.drangeProducts = function(datey){
+ 
+    if(datey.startDate == null || datey.startDate == undefined  || datey.endDate == null || datey.endDate == undefined)
+    {
+        SweetAlert.swal("Please select date range!"); 
+     
+    }
+    else 
+    {
+       start = $filter("date")(datey.startDate._d, 'yyyy-MM-dd');
+        end = $filter("date")(datey.endDate._d, 'yyyy-MM-dd');
+    
+    var data = { startDate: start,
+                 endDate: end } ;
+
+    $http.post('/api/drangeProducts',data)
+        .success(function (data,status) {
+            
+            var tabledata =[];
+            $scope.tabledata = data;
+            if(tabledata!=null)
+            {
+                var result = [];
+                $scope.result = $scope.tabledata;
+                self.tableParams = new NgTableParams({}, { dataset: result});
+            }
+        }).error(function(data) {
+            console.error("error in posting");
+
+    });
+    }
+    }
+
+
+
+
+
+
+
+
+
+    $scope.townessCurrentInventory = function()
+    {
+        $http.get('/api/townessCurrentInventory').success(function(data)
+        {
+            var tabledata =[];
+            $scope.tabledata = data;
+            if(tabledata!=null)
+            {
+                var resul = [];
+                $scope.resul = $scope.tabledata;
+                self.tabletParams = new NgTableParams({}, { dataset: resul});
+            }
         });
-        }
+
     }
 
     $scope.outofStock = function()
@@ -35,7 +142,7 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
             $scope.tabledata = data;
             if(tabledata!=null)
             {
-                var result = [];
+                var resul = [];
                 $scope.resul = $scope.tabledata;
                 self.tabletParams = new NgTableParams({}, { dataset: resul});
             }
@@ -44,9 +151,11 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
     }
 
 
+
+
+
     $scope.products1 = function()
     {
-
         $http.get('/api/products1').success(function(data)
         {
             var tabledata =[];
@@ -59,9 +168,8 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
             }
         });
     }
-     $scope.products7 = function()
+    $scope.products7 = function()
     {
-
         $http.get('/api/products7').success(function(data)
         {
             var tabledata =[];
@@ -75,10 +183,8 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
             }
         });
     }
-
     $scope.products30 = function()
     {
-
         $http.get('/api/products30').success(function(data)
         {
             var tabledata =[];
@@ -91,6 +197,9 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
             }
         });
     }
+
+
+
 
     $scope.downloads7 = function()
     {
@@ -106,8 +215,7 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
             }
         });
     }
-
-     $scope.downloads15 = function()
+    $scope.downloads15 = function()
     {
         $http.get('/api/download_reports15').success(function(data)
         {
@@ -121,7 +229,6 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
             }
         });
     }
-
     $scope.downloads30 = function()
     {
         $http.get('/api/download_reports30').success(function(data)
@@ -137,6 +244,12 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
         });
     }
 
+
+
+
+
+
+
     $scope.subscriptions7 = function()
     {
         $http.get('/api/subscription_reports7').success(function(data)
@@ -151,7 +264,6 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
             }
         });
     }
-
     $scope.subscriptions15 = function()
     {
         $http.get('/api/subscription_reports15').success(function(data)
@@ -166,7 +278,6 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
             }
         });
     }
-
     $scope.subscriptions30 = function()
     {
         $http.get('/api/subscription_reports30').success(function(data)
@@ -183,6 +294,13 @@ var app = angular.module('mainController',['ngTable','ngTableToCsv'])
     }
 
 
+
+
+    $scope.vendorgrowth = function()
+    {
+
+
+    }
 
     // function refresh()
     // {

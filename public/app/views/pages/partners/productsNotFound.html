@@ -1,0 +1,43 @@
+<div class="row text-center">
+    <div class="container">
+    <h4>PRODUCTS NOT FOUND</h4>
+        <div class="container">
+        <div class="row" align="center">
+            <div class='btn-toolbar'>
+            <button class="page-scroll btn btn-lg" ng-click= products7()>7 days</button>
+            <button class="page-scroll btn btn-lg" ng-click= products30()>30 days</button>
+            </div>
+        </div>
+        <br>
+        <div class="row" align="left">
+            <datepicker date-format="yyyy-MM-dd">
+            <input class="input-lg" ng-model="dati" placeholder= "{{ datedefault }}" date-set="{{ datedefault }}" type="text"/>&nbsp;&nbsp;&nbsp;
+            <button style="padding-left:10px;" class = "page-scroll btn btn-lg" ng-click= "datepick(dati)">Check</button>
+            </datepicker>
+         </div>
+         <br>
+        <div class="row" align="left">    
+        <div class="col-md-4" style="padding-right: 0px;">
+            <input date-range-picker style="margin-right: -15px; margin-left: -15px; " placeholder= "Click to Enter Date Range" class="input-lg form-control date-picker" type="text" ng-model="date" />
+        </div>
+        <div class="col-md-1">    
+            <button class="page-scroll btn btn-lg" style="margin-left:-15px;" ng-click=drangeProducts(date)>Check</button>
+        </div>
+        </div>
+        </div>
+      <a class="btn" onClick="doSaveAs() title="Export Table" ng-click='csv.generate()' ng-href="{{ csv.link() }}" download="NotFound.csv">
+        <i class="glyphicon glyphicon-new-window"></i> &#160;Export
+      </a>
+        <table ng-table="vm.tableParams" class="table table-str table-bordered" export-csv="csv" separator=",">
+            <tr align="center" ng-repeat="x in result track by $index">
+                <td align="center" title="'Product'" >
+                    {{x.coll}}</td>
+                <td align="center" title="'Count'">
+                    {{x.roww}}</td>
+                <td align="center" title="'Cost'">
+                    {{x.roww1}}</td>
+            </tr>
+        </table>
+    
+    </div>
+</div>

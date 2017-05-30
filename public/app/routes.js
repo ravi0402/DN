@@ -1,53 +1,64 @@
-var app = angular.module('appRoutes', ['ngRoute'])
 
-// Configure Routes; 'authenticated = true' means the user must be logged in to access the route
-.config(function($routeProvider, $locationProvider) {
 
-    // AngularJS Route Handler
-    $routeProvider
+var app = angular.module('appRoutes', ['ui.router']);
 
-    .when('/', {
-        templateUrl: 'app/views/pages/home.html'
-    })
+app.config(function($stateProvider, $urlRouterProvider,$locationProvider) {
 
-    .when('/error', {
+    $urlRouterProvider.otherwise('/error');
+
+$stateProvider
+
+ 
+    .state('error', {
+        url: '/error',
         templateUrl: 'app/views/pages/error.html'
     })
 
-     .when('/products', {
-        templateUrl: 'app/views/pages/productsNotFound.html',
-         controller: 'mainCtrl',
+
+
+    .state('partners', {
+        url: '/partners',
+        templateUrl: 'app/views/pages/partners/partners.html'
+    })
+    .state('partners.products', {
+        url: '/products',
+        templateUrl: 'app/views/pages/partners/productsNotFound.html',
+        controller: 'mainCtrl',
         controllerAs: 'main'
     })
-
-     .when('/downloads',{
-     templateUrl: 'app/views/pages/downloads.html',
-     controller: 'mainCtrl',
-    controllerAs: 'main'
-    })
-
-     .when('/subscriptions',{
-         templateUrl: 'app/views/pages/subscriptions.html',
-         controller: 'mainCtrl',
-        controllerAs: 'main'
-     })
-
-     .when('/daterange', {
-        templateUrl: 'app/views/pages/posts.html',
-         controller: 'mainCtrl',
+    .state('partners.outOfStock', {
+        url: '/outOfStock',
+        templateUrl: 'app/views/pages/partners/outOfStock.html',
+        controller: 'mainCtrl',
         controllerAs: 'main'
     })
-
-    .when('/outOfStock', {
-        templateUrl: 'app/views/pages/outOfStock.html',
-         controller: 'mainCtrl',
-        controllerAs: 'main'
-    })
-
   
 
-    .otherwise({ redirectTo: '/error' }); 
 
-    $locationProvider.html5Mode({ enabled: true, requireBase: false }); 
+    .state('dnbi', {
+        url: '/dnbi',
+        templateUrl: 'app/views/pages/dnbi/dnbi.html',
+        controller: 'mainCtrl',
+        controllerAs: 'main'
+    })
+    .state('dnbi.downloads', {
+        url: '/downloads',
+        templateUrl: 'app/views/pages/dnbi/downloads.html',
+        controller: 'mainCtrl',
+        controllerAs: 'main'
+    })
+    .state('dnbi.subscriptions', {
+        url: '/subscriptions',
+        templateUrl: 'app/views/pages/dnbi/subscriptions.html',
+        controller: 'mainCtrl',
+        controllerAs: 'main'
+    })
+    .state('dnbi.townessCurrentInventory', {
+        url: '/townessCurrentInventory',
+        templateUrl: 'app/views/pages/dnbi/townessCurrentInventory.html',
+        controller: 'mainCtrl',
+        controllerAs: 'main'
+    })
+
+    $locationProvider.html5Mode(true);
 });
-

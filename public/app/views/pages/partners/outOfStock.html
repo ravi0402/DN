@@ -1,0 +1,22 @@
+<div class="row text-center">
+    <div class="container">
+    </nav>
+        <h4 class="section-heading">Out Of Stock Products</h4>
+      <a class="btn" title="Export Table" ng-click='csv.generate()' ng-href="{{ csv.link() }}"
+         download="outofstock.csv">
+        <i class="glyphicon glyphicon-new-window"></i> &#160;Export
+      </a>
+        <table ng-table="vm.tabletParams" class="table table-bordered" export-csv="csv" separator=",">
+            <tr align="center" ng-repeat="x in resul">
+                <td title="'Product Name'" >
+                    {{x.product_name}}</td>
+                <td align="center" title="'Product Cost'">
+                    {{x.unit_cost}}</td>
+                <td align="center" title="'Product Size'" >
+                    {{x.unit_cost}}</td>
+                <td align="center" title="'Product Category'">
+                    {{x.product_category}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

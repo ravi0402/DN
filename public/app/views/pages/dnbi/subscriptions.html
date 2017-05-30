@@ -1,0 +1,37 @@
+<div class="row text-center">
+    <div class="container">
+            <h4 class="section-heading">Subscription Report</h4>
+        <div class="row" align="center">
+            
+        </div>
+        <div class='btn-toolbar'>
+
+          <button class="page-scroll btn btn-lg" ng-click= subscriptions7()>7 days</button>
+            <button class="page-scroll btn btn-lg" ng-click= subscriptions15()>15 days</button>
+            <button class="page-scroll btn btn-lg" ng-click= subscriptions30()>30 days</button>
+        </div>
+        <br>
+        <div class="row" align="left">    
+        <div class="col-md-4">
+            <input date-range-picker placeholder= "Click to Enter Date Range" class="input-lg form-control date-picker" type="text" ng-model="date" />
+        </div>
+        <div class="col-md-1">    
+            <button class="page-scroll btn btn-lg" ng-click=drangeSubs(date)>Submit</button>
+        </div>
+        </div>
+    </nav>
+
+      <a class="btn" title="Export Table" ng-click='csv.generate()' ng-href="{{ csv.link() }}"
+         download="Subscription_report.csv">
+        <i class="glyphicon glyphicon-new-window"></i> &#160;Export
+      </a>
+        <table ng-table="vm.tableParams" class="table table-bordered" export-csv="csv" separator=",">
+            <tr ng-repeat="x in result track by $index">
+                <td align="center" title="'Building Name'" >
+                    {{x.building_name}}</td>
+                <td align="center" title="'Subscriptions'">
+                    {{x.subscription_count}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

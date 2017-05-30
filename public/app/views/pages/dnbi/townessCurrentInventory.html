@@ -1,0 +1,30 @@
+<div class="row text-center">
+    <div class="container">
+    </nav>
+        <h4 class="section-heading">Towness Current Inventory</h4>
+      <a class="btn" title="Export Table" ng-click='csv.generate()' ng-href="{{ csv.link() }}"
+         download="towness_report.csv">
+        <i class="glyphicon glyphicon-new-window"></i> &#160;Export
+      </a>
+        <table ng-table="vm.tabletParams" class="table table-bordered" export-csv="csv" separator=",">
+            <tr ng-repeat="x in resul">
+                <td align="center" title="'dn_id'" >
+                    {{x.dn_id}}</td>
+                <td align="center" title="'towness_id'">
+                    {{x.towness_id}}</td>
+                <td title="'product_name'" >
+                    {{x.product_name}}</td>
+                <td align="center" title="'product_unit_price'">
+                    {{x.product_unit_price}}</td>
+                <td align="center" title="'quantity'">
+                {{x.quantity}}</td>
+                <td align="center" title="'last_sync_quantity'">
+                {{x.last_sync_quantity}}</td>
+                <td align="center" title="'min_order_size'">
+                {{x.min_order_size}}</td>
+                <td align="center" title="'dn_order_size'">
+                {{x.dn_order_size}}</td>
+          </tr>
+        </table>
+    </div>
+</div>

@@ -1,85 +1,55 @@
 <html lang="en">
 
 <head>
-    <base href="/">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<base href="/">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <!-- Main Angular Files -->
-    <script src="assets/js/angular.js"></script>
-    <script src="assets/js/angular-route.js"></script>
-    <script src="assets/js/angular-animate.js"></script>
-    <link href="assets/bower_components/angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" type="text/css" /> 
-    <!-- Angular Config/Routes -->
-    <script src="app/app.js"></script>
-    <script src="app/routes.js"></script>
-    <script type="text/javascript" src="assets/bower_components/ng-table-to-csv/dist/ng-table-to-csv.js"></script>
-    <script src="app/controllers/userCtrl.js"></script>
-    <script src="app/controllers/mainCtrl.js"></script>
-    <script src="app/services/userServices.js"></script>
-    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
-    <link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
-    <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+<!-- Main Angular Files -->
+<link rel="stylesheet" href="assets/bower_components/DateRange/bootstrap-daterangepicker/daterangepicker.css"/>
+<link rel="stylesheet" href="assets/bower_components/sweetalert/dist/sweetalert.css"/>
+<script src="assets/js/angular.js"></script>
+<script src="assets/js/angular-animate.js"></script>
+<script src="app/app.js"></script>
+<script src="app/routes.js"></script>    
+<script type="text/javascript" src="assets/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<link href="assets/bower_components/angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" type="text/css" /> 
 
+
+
+<script type="text/javascript" src="assets/bower_components/ng-table-to-csv/dist/ng-table-to-csv.js"></script>
+<script src="app/controllers/userCtrl.js"></script>
+<script src="app/controllers/mainCtrl.js"></script>
+<script src="app/services/userServices.js"></script>
+
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+<link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
 
     <title>DailyNinja</title>
 
 </head>
-
-
+ 
 <body ng-app="userApp" ng-controller="mainCtrl as main">
 
 <div class="container">
-
-    <!-- HEADER -->
-    <nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">DailyNinja </a>
-        </div>
-
-        <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
-        <ul class="nav navbar-nav">
-            <li><a href="/products">Product Not Found</a></li>
-            <li><a href="/downloads">Downloads</a></li>
-            <li><a href="/subscriptions">Subscriptions</a></li>
-            <li><a href="/outOfStock" ng-click=outofStock()>Out Of Stock</a>
-
-        </ul>
-    </nav>
-    <!-- ANGULAR DYNAMIC CONTENT -->
-    <div ng-view></div>
-
+    <div ui-view></div>
 </div>
-    <script src="assets/bower_components/angularjs-datepicker/src/js/angular-datepicker.js"></script>
-    <script src="assets/js/jquery-3.1.1.min.js"></script>
-    <script src="assets/js/bootstrap.js"></script>
-    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-    <!-- <script src="assets/lib/bower/src/bootstrap-table.js"></script> -->
-    <!-- <script src="assets/lib/bower/src/locale/bootstrap-table-zh-CN.js"></script> -->
-    <!-- <script>
-    $(function() {
-        $("#datepicker").datepicker({
-            onSelect:function(date) {
-            //console.log(date);
-              $.ajax({
-                type: "POST",
-                url: "http://localhost:8085/api/daterange",
-                dataType: 'json',
-                data: { json: JSON.stringify(date) },
-                success: function(data){    
-                    //res.send(data);    
-                }   
-            });
-        }
-    });
-    });
-    </script> -->
+
+<script src="assets/bower_components/DateRange/jquery.min.js"></script>
+<script src="assets/bower_components/DateRange/moment.js"></script>
+<script src="assets/bower_components/ngSweetAlert/SweetAlert.min.js"></script>
+<script src="assets/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+<script src="assets/bower_components/DateRange/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="assets/bower_components/DateRange/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+<script src="assets/bower_components/angularjs-datepicker/src/js/angular-datepicker.js"></script>
+<!-- <script src="assets/js/jquery-3.1.1.min.js"></script> -->
+<script src="assets/js/bootstrap.js"></script>
 </body>
 
 </html>

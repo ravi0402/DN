@@ -12,7 +12,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
 app.use(express.static(__dirname + '/public'));
 
 //require('./app_api/db');
@@ -26,8 +25,6 @@ app.get('*', function(req, res)
     res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
 
-
-
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
@@ -38,7 +35,6 @@ app.use(function(err, req, res, next) {
 
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   res.status(err.status || 500);
   res.render('error');
 });

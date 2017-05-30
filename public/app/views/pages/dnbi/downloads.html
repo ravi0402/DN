@@ -1,0 +1,29 @@
+<div class="row text-center">
+    <div class="container">
+         <h4 class="section-heading">Download Reports</h4>
+        <div class="row" align="center">
+            
+       
+        <div class='btn-toolbar'>
+
+           <button class="page-scroll btn btn-lg" ng-click= downloads7()>7 days</button>
+            <button class="page-scroll btn btn-lg" ng-click= downloads15()>15 days</button>
+            <button class="page-scroll btn btn-lg" ng-click= downloads30()>30 days</button>
+
+        </div>
+         </div>
+    </nav>
+      <a class="btn" title="Export Table" ng-click='csv.generate()' ng-href="{{ csv.link() }}"
+         download="Download_report.csv">
+        <i class="glyphicon glyphicon-new-window"></i> &#160;Export
+      </a>
+        <table ng-table="vm.tableParams" class="table table-bordered" export-csv="csv" separator=",">
+            <tr ng-repeat="x in result">
+                <td align="center" title="'Building Name'" >
+                    {{x.building_name}}</td>
+                <td align="center" title="'Downloads'">
+                    {{x.download_count}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
