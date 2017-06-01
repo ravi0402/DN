@@ -10,31 +10,20 @@ router.post('/datepick', function (req, res, next) {
         {
             throw err;
         }
-
-        var keyy = Object.keys(results[0]);
-        var arr = [];
-        var key1 = 'coll';
-        var key2 = 'roww';
-        var key3 = 'roww1';
         var total_cost = 0;
         var total_count = 0;
-        for (var i=0; i<results.length; i++)
+        for(var i=0;i<results.length;i++)
         {
-            var map = new Object();
-            map[key1] = results[i].product_name;
-            map[key2] = results[i].order_count;
-            map[key3] = results[i].cost;
-            total_count += parseInt((results[i].order_count).toString());
-            total_cost += parseInt(results[i].cost);
-            arr.push(map);
+            total_count += results[i].order_count ;
+            total_cost += results[i].cost ;
         }
- 
+       
         var map = new Object();
-        map[key1] = 'TOTAL';
-        map[key2] = total_count;
-        map[key3] = total_cost;
-        arr.push(map);
-        res.json(arr);
+        map['product_name'] = 'Total';
+        map['order_count'] = total_count;
+        map['cost'] = total_cost;
+        results.push(map);
+        res.json(results);
     });
         
 });
@@ -49,30 +38,20 @@ client.query("SELECT pm.product_name, COUNT(do.order_id) AS order_count, do.prod
         {
             throw err;
         }
-
-        var keyy = Object.keys(results[0]);
-        var arr = [];
-        var key1 = 'coll';
-        var key2 = 'roww';
-        var key3 = 'roww1';
         var total_cost = 0;
         var total_count = 0;
-        for (var i=0; i<results.length; i++)
+        for(var i=0;i<results.length;i++)
         {
-            var map = new Object();
-            map[key1] = results[i].product_name;
-            map[key2] = results[i].order_count;
-            map[key3] = results[i].cost;
-            total_count += parseInt((results[i].order_count).toString());
-            total_cost += parseInt(results[i].cost);
-            arr.push(map);
+            total_count += results[i].order_count ;
+            total_cost += results[i].cost ;
         }
+       
         var map = new Object();
-        map[key1] = 'TOTAL';
-        map[key2] = total_count;
-        map[key3] = total_cost;
-        arr.push(map);
-        res.json(arr);
+        map['product_name'] = 'Total';
+        map['order_count'] = total_count;
+        map['cost'] = total_cost;
+        results.push(map);
+        res.json(results);
     });
 });
 
@@ -84,30 +63,20 @@ client.query("SELECT pm.product_name, COUNT(do.order_id) AS order_count, do.prod
             throw err;
         }
 
-        var keyy = Object.keys(results[0]);
-        var arr = [];
-        var key1 = 'coll';
-        var key2 = 'roww';
-        var key3 = 'roww1';
-        var total_cost = 0;
+       var total_cost = 0;
         var total_count = 0;
-        for (var i=0; i<results.length; i++)
+        for(var i=0;i<results.length;i++)
         {
-            var map = new Object();
-            map[key1] = results[i].product_name;
-            map[key2] = results[i].order_count;
-            map[key3] = results[i].cost;
-            total_count += parseInt((results[i].order_count).toString());
-            total_cost += parseInt(results[i].cost);
-            arr.push(map);
+            total_count += results[i].order_count ;
+            total_cost += results[i].cost ;
         }
-
+       
         var map = new Object();
-        map[key1] = 'TOTAL';
-        map[key2] = total_count;
-        map[key3] = total_cost;
-        arr.push(map);
-        res.json(arr);
+        map['product_name'] = 'Total';
+        map['order_count'] = total_count;
+        map['cost'] = total_cost;
+        results.push(map);
+        res.json(results);
     });
 });
 router.get('/products30', function (req, res, next) {
@@ -117,31 +86,20 @@ client.query("SELECT pm.product_name, COUNT(do.order_id) AS order_count, do.prod
         {
             throw err;
         }
-
-        var keyy = Object.keys(results[0]);
-        var arr = [];
-        var key1 = 'coll';
-        var key2 = 'roww';
-        var key3 = 'roww1';
-        var total_cost = 0;
+var total_cost = 0;
         var total_count = 0;
-        for (var i=0; i<results.length; i++)
+        for(var i=0;i<results.length;i++)
         {
-            var map = new Object();
-            map[key1] = results[i].product_name;
-            map[key2] = results[i].order_count;
-            map[key3] = results[i].cost;
-            total_count += parseInt((results[i].order_count).toString());
-            total_cost += parseInt(results[i].cost);
-            arr.push(map);
+            total_count += results[i].order_count ;
+            total_cost += results[i].cost ;
         }
-
+       
         var map = new Object();
-        map[key1] = 'TOTAL';
-        map[key2] = total_count;
-        map[key3] = total_cost;
-        arr.push(map);
-        res.json(arr);
+        map['product_name'] = 'Total';
+        map['order_count'] = total_count;
+        map['cost'] = total_cost;
+        results.push(map);
+        res.json(results);
     });
 });
 
@@ -155,30 +113,20 @@ client.query("SELECT pm.product_name, COUNT(do.order_id) AS order_count, do.prod
         {
             throw err;
         }
-        var keyy = Object.keys(results[0]);
-        var arr = [];
-        var key1 = 'coll';
-        var key2 = 'roww';
-        var key3 = 'roww1';
         var total_cost = 0;
         var total_count = 0;
-        for (var i=0; i<results.length; i++)
+        for(var i=0;i<results.length;i++)
         {
-            var map = new Object();
-            map[key1] = results[i].product_name;
-            map[key2] = results[i].order_count;
-            map[key3] = results[i].cost;
-            total_count += parseInt((results[i].order_count).toString());
-            total_cost += parseInt(results[i].cost);
-            arr.push(map);
+            total_count += results[i].order_count ;
+            total_cost += results[i].cost ;
         }
-
+       
         var map = new Object();
-        map[key1] = 'TOTAL';
-        map[key2] = total_count;
-        map[key3] = total_cost;
-        arr.push(map);
-        res.json(arr);
+        map['product_name'] = 'Total';
+        map['order_count'] = total_count;
+        map['cost'] = total_cost;
+        results.push(map);
+        res.json(results);
     });
 });
 

@@ -12,7 +12,8 @@ dd = $filter("date")(d, 'yyyy-MM-dd');
 
 $scope.datedefault = $filter("date")(dd, 'yyyy-MMM-dd');
 
-
+$scope.today = new Date(); 
+console.log($scope.today);
 
 $scope.datepick = function(date){
     if(date==undefined || date==null)
