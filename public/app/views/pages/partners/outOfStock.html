@@ -6,15 +6,15 @@
          download="outofstock.csv">
         <i class="glyphicon glyphicon-new-window"></i> &#160;Export
       </a>
-        <table ng-table="vm.tabletParams" class="table table-bordered" export-csv="csv" separator=",">
-            <tr align="center" ng-repeat="x in resul">
-                <td title="'Product Name'" >
+        <table ng-table="tableParams" class="table table-bordered table-striped" export-csv="csv" separator=",">
+            <tr align="center" ng-repeat="x in orderedData_outfs">
+                <td title="'Product Name'" filter="{ product_name: 'text'}" sortable="'product_name'">
                     {{x.product_name}}</td>
-                <td align="center" title="'Product Cost'">
+                <td align="center" title="'Product Cost'" filter="{ unit_cost: 'text'}" sortable="'unit_cost'">
                     {{x.unit_cost}}</td>
-                <td align="center" title="'Product Size'" >
+                <td align="center" title="'Product Size'" filter="{ unit_size: 'text'}" sortable="'unit_size'">
                     {{x.unit_size}}</td>
-                <td align="center" title="'Product Category'">
+                <td align="center" title="'Product Category'" filter="{ product_category: 'text'}" sortable="'product_category'">
                     {{x.product_category}}</td>
             </tr>
         </table>

@@ -25,11 +25,11 @@
          download="Subscription_report.csv">
         <i class="glyphicon glyphicon-new-window"></i> &#160;Export
       </a>
-        <table ng-table="vm.tableParams" class="table table-bordered" export-csv="csv" separator=",">
-            <tr ng-repeat="x in result track by $index">
-                <td align="center" title="'Building Name'" >
+        <table ng-table="tableParams" class="table table-bordered table-striped" export-csv="csv" separator=",">
+            <tr ng-repeat="x in orderedData_subs">
+                <td align="center" title="'Building Name'" filter="{ building_name: 'text'}" sortable="'building_name'" >
                     {{x.building_name}}</td>
-                <td align="center" title="'Subscriptions'">
+                <td align="center" title="'Subscriptions'" sortable="'subscription_count'">
                     {{x.subscription_count}}</td>
             </tr>
         </table>

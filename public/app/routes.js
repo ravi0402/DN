@@ -32,6 +32,12 @@ $stateProvider
         controller: 'mainCtrl',
         controllerAs: 'main'
     })
+    .state('partners.townessCurrentInventory', {
+        url: '/townessCurrentInventory',
+        templateUrl: 'app/views/pages/partners/townessCurrentInventory.html',
+        controller: 'mainCtrl',
+        controllerAs: 'main'
+    })
   
 
 
@@ -53,9 +59,9 @@ $stateProvider
         controller: 'mainCtrl',
         controllerAs: 'main'
     })
-    .state('dnbi.townessCurrentInventory', {
-        url: '/townessCurrentInventory',
-        templateUrl: 'app/views/pages/dnbi/townessCurrentInventory.html',
+    .state('dnbi.vendorGrowth', {
+        url: '/vendorGrowth',
+        templateUrl: 'app/views/pages/dnbi/vendorGrowth.html',
         controller: 'mainCtrl',
         controllerAs: 'main'
     })

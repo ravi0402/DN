@@ -187,9 +187,32 @@ client.query("SELECT pm.product_name, COUNT(do.order_id) AS order_count, do.prod
 
 
 
-router.get('/townessCurrentInventory', function (req, res, next) {
+router.post('/townessCurrentInventory', function (req, res, next) {
+    var idd = req.body.id;
+    if(idd=='0')
+    {
+        var str ="IS NOT NULL";
+    }
+    else
+    {
+        console.log(idd);
+        var str = "='"+idd.toString()+"'";
+    }  
+    console.log(str);
+client.query("SELECT pp.id AS dn_id , pp.external_system_id AS towness_id, pp.product_name, pp.product_unit_price, inv.quantity, inv.last_sync_quantity, pp.min_order_size, pp.dn_order_size FROM product_parent pp JOIN inventory inv ON inv.product_parent_id = pp.id WHERE pp.external_supplier_id = 5 AND pp.status = 1 AND pp.product_category "+ str +" ORDER BY product_name ASC" , function(err, results) {
+        if (err)
+        {
+            throw err;
+        }
+        console.log(results);
+        res.json(results);
+    });
+});
+
+
+router.get('/get_category', function (req, res, next) {
         
-client.query("SELECT pp.id AS dn_id , pp.external_system_id AS towness_id, pp.product_name, pp.product_unit_price, inv.quantity, inv.last_sync_quantity, pp.min_order_size, pp.dn_order_size FROM product_parent pp JOIN inventory inv ON inv.product_parent_id = pp.id WHERE pp.external_supplier_id = 5 AND pp.status = 1 AND pp.product_category IS NOT NULL ORDER BY product_name ASC" , function(err, results) {
+client.query("SELECT id,name AS category FROM product_category" , function(err, results) {
         if (err)
         {
             throw err;
@@ -197,7 +220,6 @@ client.query("SELECT pp.id AS dn_id , pp.external_system_id AS towness_id, pp.pr
         res.json(results);
     });
 });
-
 
 router.get('/download_reports7', function (req, res, next) {
         
@@ -300,8 +322,6 @@ client.query("SELECT b.building_name, COUNT(*) as subscription_count FROM user u
 router.post('/drangeSubs', function (req, res, next) {
     var startDate = req.body.startDate ; 
     var endDate = req.body.endDate ;     
-    console.log(startDate);
-    console.log(endDate);
 client.query("select b.building_name, COUNT(*) as subscription_count from user u join building b on u.building = b.id join billing_master bm on u.billing_master_id  = bm.id where u.created_at >= '"+ startDate +" 00:00:00' and u.created_at < '"+endDate+" 00:00:00' and bm.amount < 0 group by b.building_name;" , function(err, results) {
         if (err)
         {
@@ -325,6 +345,31 @@ client.query("select b.building_name, COUNT(*) as subscription_count from user u
 router.get('/outofstock', function (req, res, next) {
         
 client.query("SELECT DISTINCT(pm.product_name) AS product_name, pm.product_unit_size AS unit_size, pm.product_unit_price AS unit_cost, pc.name AS product_category FROM product_master pm JOIN product_category pc ON pm.product_category = pc.id WHERE pm.status = 2 AND pm.fulfilled_by_vendor = 0 ORDER BY product_category" , function(err, results) {
+        if (err)
+        {
+            throw err;
+        }
+
+        res.json(results);
+    });
+});
+
+
+router.post('/vendorGrowth', function (req, res, next) {
+ var startDate = req.body.startDate ; 
+    var endDate = req.body.endDate ;        
+client.query("SELECT b.vendor_name, COUNT(u.user_name) as user_count FROM building b JOIN `user` u ON b.id = u.building WHERE u.created_at <= '"+ endDate + "00:00:00' AND u.created_at >= '"+ startDate + " 00:00:00' GROUP BY u.building" , function(err, results) {
+        if (err)
+        {
+            throw err;
+        }
+
+        res.json(results);
+    });
+});
+
+router.get('/vendorGrowth30', function (req, res, next) {        
+client.query("SELECT b.vendor_name, COUNT(u.user_name) as user_count FROM building b JOIN `user` u ON b.id = u.building WHERE u.created_at > DATE_SUB(CURDATE(),INTERVAL 30 DAY) GROUP BY u.building" , function(err, results) {
         if (err)
         {
             throw err;

@@ -1,0 +1,45 @@
+<div class="row text-center">
+    </nav>
+        <h4 class="section-heading">Towness Current Inventory</h4>
+        <br>
+        <div class="container">
+        <div class="row">
+        <div class="col-md-4" align="left">
+        <select class ="form-control input-lg" ng-model="selectedTestAccount" 
+            ng-options="item.category for item in testAccounts">
+            <option value="">Select Category</option>
+        </select>
+        </div>
+        <div class="col-md-1" align="left">
+        <button class="btn btn-lg" ng-click=getDataa(selectedTestAccount,testAccounts)>Submit</button>
+        </div>
+        </div>
+        <br>
+        <br>
+        </div>
+        <div class="container">
+      <a class="btn" title="Export Table" ng-click='csv.generate()' ng-href="{{ csv.link() }}"
+         download="towness_report.csv">
+        <i class="glyphicon glyphicon-new-window"></i> &#160;Export
+      </a>
+        <table ng-table="tableParams" class="table table-striped table-bordered" export-csv="csv" separator=",">
+            <tr ng-repeat="x in orderedData_towness">
+                <td align="center" title="'dn_id'" filter="{ dn_id: 'text'}">
+                    {{x.dn_id}}</td>
+                <td align="center" title="'towness_id'" filter="{ towness_id: 'text'}">
+                    {{x.towness_id}}</td>
+                <td title="'product_name'" filter="{ product_name: 'text'}" sortable="'product_name'">
+                    {{x.product_name}}</td>
+                <td align="center" title="'product_unit_price'" sortable="'product_unit_price'">
+                    {{x.product_unit_price}}</td>
+                <td align="center" title="'quantity'" sortable="'quantity'">
+                {{x.quantity}}</td>
+                <td align="center" title="'min_order_size'" sortable="'min_order_size'">
+                {{x.min_order_size}}</td>
+                <td align="center" title="'dn_order_size'" sortable="'dn_order_size'">
+                {{x.dn_order_size}}</td>
+            </tr>
+        </table>
+        </div>
+    </div>
+</div>
