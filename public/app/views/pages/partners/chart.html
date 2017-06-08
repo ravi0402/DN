@@ -1,0 +1,39 @@
+<div class="container">
+        <div class="row">
+            <div class="col-md-4" align="left">
+                <select class ="form-control input-lg" ng-model="selectedVendor1"
+                        ng-options="item.name for item in Vendors">
+                    <option value="">Select Vendor1</option>
+                </select>
+            </div>
+            <div class="col-md-4" align="left">
+                <select class ="form-control input-lg" ng-model="selectedVendor2"
+                        ng-options="item.name for item in Vendors">
+                    <option value="">Select Vendor2</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+        <div class="col-md-4" align="left">
+                <select class ="form-control input-lg" ng-model="selectedParameter"
+                        ng-options="item for item in Parameters">
+                    <option value="">Select Parameter</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <br>
+    <div class="container">
+    <div class="row" align="left">
+        <div class="col-md-4" style="padding-right: 0px;">
+            <input date-range-picker style="margin-right: -15px; margin-left: -15px; " placeholder= "Click to Enter Date Range" class="input-lg form-control date-picker" max="today" type="text" ng-model="date" />
+        </div>
+        <div class="col-md-1">
+            <button class="page-scroll btn btn-lg" style="margin-left:-15px;" ng-click=compareVendor(selectedVendor1,selectedVendor2,date,selectedParameter)>Check</button>
+        </div>
+    </div>
+    </div>
+    <div google-chart chart="myChartObject" agc-on-select="hideSeries(selectedItem)" style="height:450px; width:100%;"></div>
+</div>

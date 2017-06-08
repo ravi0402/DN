@@ -5,13 +5,13 @@
         <div class="container">
         <div class="row">
         <div class="col-md-4" align="left">
-        <select class ="form-control input-lg" ng-model="selectedTestAccount" 
-            ng-options="item.category for item in testAccounts">
+        <select class ="form-control input-lg" ng-model="selectedCategory"
+            ng-options="item.category for item in Categories">
             <option value="">Select Category</option>
         </select>
         </div>
         <div class="col-md-1" align="left">
-        <button class="btn btn-lg" ng-click=getDataa(selectedTestAccount,testAccounts)>Submit</button>
+        <button class="btn btn-lg" ng-click=getDataa(selectedCategory,Categories)>Submit</button>
         </div>
         </div>
         <br>
@@ -19,7 +19,7 @@
         </div>
         <div class="container">
       <a class="btn" title="Export Table" ng-click='csv.generate()' ng-href="{{ csv.link() }}"
-         download="towness_report.csv">
+         download="stock_prediction.csv">
         <i class="glyphicon glyphicon-new-window"></i> &#160;Export
       </a>
         <table ng-table="tableParams" class="table table-striped table-bordered" export-csv="csv" separator=",">

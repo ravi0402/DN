@@ -1,18 +1,18 @@
-<div class="container">
-    <nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a class="navbar-brand" ui-sref="dnbi">DailyNinja </a>
-        </div>
-    <ul class="nav navbar-nav">
-        <li><a ui-sref=".downloads" >Downloads Report</a></li>
-        <li><a ui-sref=".subscriptions" >Subscriptions Report</a></li>
-        <li><a ui-sref=".vendorGrowth" >Vendor-Growth Report</a></li>
-    </ul>
+<div class="navbar navbar-default navbar-static-top"
+     role="navigation" bs-navbar>
+    <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="dnbi">
+        <!-- <span class="glyphicon glyphicon-film"></span> -->
+        <span><link rel="icon" type="image/png" href="favicon.ico" sizes="12x12"></span>
+        Daily<strong>Ninja</strong></a>
     </div>
-    </nav>
+    <ul class="nav navbar-nav">
+        <li data-match-route=".downloads"><a ui-sref=".downloads" >Downloads Report</a></li>
+        <li data-match-route=".subscriptions"><a ui-sref=".subscriptions">Subscriptions Report</a></li>
+        <li data-match-route=".vendorGrowth"><a ui-sref=".vendorGrowth">Vendor-Growth Report</a></li>
+    </ul>
 </div>
 
 <div class="container">
-
 <div ui-view></div>        
 </div>

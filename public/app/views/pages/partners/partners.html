@@ -1,3 +1,26 @@
+<div class="navbar navbar-default navbar-static-top"
+     role="navigation" bs-navbar>
+    <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="partners">
+        <!-- <span class="glyphicon glyphicon-film"></span> -->
+        <span><link rel="icon" type="image/png" href="favicon.ico" sizes="12x12"></span>
+        Daily<strong>Ninja</strong></a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li data-match-route=".products"><a ui-sref=".products" >Product Not Found</a></li>
+        <li data-match-route=".outOfStock"><a ui-sref=".outOfStock" ng-click=outofStock()>Out Of Stock</a></li>
+        <li data-match-route=".townessCurrentInventory"><a ui-sref=".townessCurrentInventory" ng-click=townessCurrentInventory() >Towness Current Inventory </a></li>
+        <li data-match-route=".chart"><a ui-sref=".chart" ng-click=vendor_chart()>Vendor Performance</a></li>
+        <li data-match-route=".stockPrediction"><a ui-sref=".stockPrediction" ng-click=stockPrediction()>Stock Prediction</a></li>
+    </ul>
+</div>
+
+
+<div ui-view></div>        
+
+
+
+<!-- 
 <div class="container">
     <nav class="navbar navbar-inverse">
     <div class="navbar-header">
@@ -7,11 +30,9 @@
         <li><a ui-sref=".products" >Product Not Found</a></li>
         <li><a ui-sref=".outOfStock" ng-click=outofStock()>Out Of Stock</a></li>
         <li><a ui-sref=".townessCurrentInventory" ng-click=townessCurrentInventory() >Towness Current Inventory </a></li>
+        <li><a ui-sref=".chart" ng-click=vendor_chart()>Vendor Performance</a></li>
+        <li><a ui-sref=".stockPrediction" ng-click=stockPrediction()>Stock Prediction</a></li>
     </ul>
     </div>
     </nav>
-</div>
-
-<div class="container">
-<div ui-view></div>        
-</div>
+</div> -->

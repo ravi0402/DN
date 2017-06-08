@@ -12,3 +12,12 @@ client = mysql.createConnection({
 });
 
 exports.client = client ;
+
+ // var date = results[i]['order_date'].toString().slice(0,10);
+                    // if(date == datep)
+                    // {
+                    //     if((results[i].product_parent_id == map['product_parent_id']) && (flag ==0) )
+                    //     {
+
+                    //     }
+                    // }

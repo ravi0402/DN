@@ -38,6 +38,18 @@ $stateProvider
         controller: 'mainCtrl',
         controllerAs: 'main'
     })
+    .state('partners.chart', {
+        url: '/chart',
+        templateUrl: 'app/views/pages/partners/chart.html',
+        controller: 'mainCtrl',
+        controllerAs: 'main'
+    })
+     .state('partners.stockPrediction', {
+        url: '/stockPrediction',
+        templateUrl: 'app/views/pages/partners/stockPrediction.html',
+        controller: 'mainCtrl',
+        controllerAs: 'main'
+    })
   
 
 
